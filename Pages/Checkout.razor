@@ -7,13 +7,29 @@
     <div class="checkout-cols">
         <div class="checkout-order-details">
             <h4>Review order</h4>
+            <OrderReview Order="Order" />
+        </div>
+
+        <div class="checkout-delivery-address">
+            <h4>Deliver to...</h4>
+            <AddressEditor Address="Order.DeliveryAddress" />
+        </div>
+    </div>
+
+    <button class="checkout-button btn btn-warning" @onclick="PlaceOrder" disabled=@isSubmitting>
+        Place order
+    </button>
+        
+    <div class="checkout-cols">
+        <div class="checkout-order-details">
+            <h4>Review order</h4>
             @foreach (var pizza in Order.Pizzas)
             {
                 <p>
                     <strong>
                         @(pizza.Size)"
                         @pizza.Special.Name
-                        (£@pizza.GetFormattedTotalPrice())
+                        (Rs. @pizza.GetFormattedTotalPrice())
                     </strong>
                 </p>
             }
@@ -21,7 +37,7 @@
             <p>
                 <strong>
                     Total price:
-                    £@Order.GetFormattedTotalPrice()
+                    Rs. @Order.GetFormattedTotalPrice()
                 </strong>
             </p>
         </div>
